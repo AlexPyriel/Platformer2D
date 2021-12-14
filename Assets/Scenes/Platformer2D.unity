@@ -5117,6 +5117,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6431733446162141352, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431733446162141352, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431733446162141356, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
       propertyPath: m_RootOrder
       value: 3

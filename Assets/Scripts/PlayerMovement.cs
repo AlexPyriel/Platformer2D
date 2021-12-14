@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rigidBody;
     private Animator _animator;
+    private SpriteRenderer _renderer;
     private float _velocity;
     private bool _grounded;
 
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -27,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        RotatePlayer();
+        FlipPlayer();
     }
 
     private void Move()
@@ -62,11 +65,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void RotatePlayer()
+    private void FlipPlayer()
     {
         if (Mathf.Approximately(0, _velocity) == false)
         {
-            transform.rotation = _velocity < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+            _renderer.flipX = _velocity < 0;
         }
     }
 }
