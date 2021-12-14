@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -27,20 +25,25 @@ public class PlayerMovement : MonoBehaviour
         Jump();
     }
 
+    private void LateUpdate()
+    {
+        RotatePlayer();
+    }
+
     private void Move()
     {
         _velocity = Input.GetAxis("Horizontal");
         transform.position += new Vector3(_velocity * _speed * Time.deltaTime, 0, 0);
 
-        if (Mathf.Approximately(0, _velocity) == false)
+        if (Mathf.Abs(_velocity) > 0)
         {
             _animator.SetBool("isWalking", true);
-            transform.rotation = _velocity < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
         }
         else
         {
             _animator.SetBool("isWalking", false);
         }
+
     }
 
     private void Jump()
@@ -56,6 +59,14 @@ public class PlayerMovement : MonoBehaviour
         {
             _grounded = true;
             _animator.SetBool("isJumping", false);
+        }
+    }
+
+    private void RotatePlayer()
+    {
+        if (Mathf.Approximately(0, _velocity) == false)
+        {
+            transform.rotation = _velocity < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
         }
     }
 }
