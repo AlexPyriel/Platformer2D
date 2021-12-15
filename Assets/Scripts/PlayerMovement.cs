@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        FlipPlayer();
+        Flip();
     }
 
     private void Move()
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void FlipPlayer()
+    private void Flip()
     {
         if (Mathf.Approximately(0, _velocity) == false)
         {
