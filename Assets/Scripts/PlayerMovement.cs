@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
         _velocity = Input.GetAxis("Horizontal");
-        transform.position += new Vector3(_velocity * _speed * Time.deltaTime, 0, 0);
+        transform.Translate(_velocity * _speed * Time.deltaTime, 0, 0);
 
         if (Mathf.Abs(_velocity) > 0)
         {

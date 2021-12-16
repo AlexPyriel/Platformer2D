@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [Header("Coin Prefab")]
-    [SerializeField] private Coin _coin;
+    [SerializeField] private Coin _template;
 
     [Header("Coins container")]
     [SerializeField] private GameObject _coinsContainer;
@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
     {
         foreach (Spot spot in _spots)
         {
-            Coin coin = Instantiate(_coin, spot.transform.position, Quaternion.identity);
+            Coin coin = Instantiate(_template, spot.transform.position, Quaternion.identity);
             coin.transform.SetParent(_coinsContainer.transform);
         }
     }
