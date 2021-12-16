@@ -12,7 +12,7 @@ public class SkyMovement : MonoBehaviour
         _startPosition = transform.position;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         transform.Translate(Vector3.left * _speed, Space.World);
         if (transform.position.x < _offset)
