@@ -8,7 +8,6 @@ public class Coin : MonoBehaviour
     {
         if (other.transform.TryGetComponent<Player>(out Player player))
         {
-            Debug.Log("Player engaged");
             PlaySound();
             Destroy(gameObject);
         }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class CoinSpawner : MonoBehaviour
 {
     [Header("Coin Prefab")]
     [SerializeField] private Coin _template;
