@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Player))]
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private Animator _animator;
     private SpriteRenderer _renderer;
+    private Player _player;
     private float _velocity;
     private bool _grounded;
 
@@ -20,17 +22,24 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
+        _player = GetComponent<Player>();
     }
 
     private void Update()
     {
-        Move();
-        Jump();
+        if (_player.IsDead == false)
+        {
+            Move();
+            Jump();
+        }
     }
 
     private void LateUpdate()
     {
-        Flip();
+        if (_player.IsDead == false)
+        {
+            Flip();
+        }
     }
 
     private void Move()
