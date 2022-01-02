@@ -5,6 +5,7 @@ using System;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody2D))]
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Player : MonoBehaviour
     private Animator _animator;
     private AudioSource _audioSource;
     private Vector3 _startPosition;
-    private CapsuleCollider2D _collider;
+    private Rigidbody2D _rigidBody;
 
     public static Action OnCoinCollected;
     public static Action OnPlayerDead;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _rigidBody = GetComponent<Rigidbody2D>();
         _startPosition = transform.position;
     }
 
@@ -43,7 +45,7 @@ public class Player : MonoBehaviour
         }
         else if (other.transform.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            _rigidBody.bodyType = RigidbodyType2D.Static;
             _animator.SetTrigger("isDead");
             _audioSource.PlayOneShot(_dieSound);
             OnPlayerDead?.Invoke();
@@ -58,7 +60,7 @@ public class Player : MonoBehaviour
 
     private void Win()
     {
-        transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        _rigidBody.bodyType = RigidbodyType2D.Static;
         transform.position = new Vector3(0, 2.6f, 0);
         _animator.SetTrigger("hasWon");
     }
