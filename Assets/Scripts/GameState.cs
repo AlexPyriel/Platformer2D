@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 
 public class GameState : MonoBehaviour
 {
     [SerializeField] private GameObject _coinContainer;
+    [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private TextMeshProUGUI _gameOverUI;
+
     private State _state;
 
     private int _totalCoins;
@@ -15,6 +19,7 @@ public class GameState : MonoBehaviour
 
     public enum State { Playing, GameOver }
     public static Action<int, int> OnAmountUpdated;
+    public static Action OnVictory;
 
     public State CurrentState => _state;
 
@@ -25,14 +30,14 @@ public class GameState : MonoBehaviour
 
     private void OnEnable()
     {
-        Player.OnCoinCollected += IncrementAmount;
-        Player.OnPlayerDead += GameOver;
+        Player.OnCoinCollected += HandleCoinCollected;
+        Player.OnPlayerDead += HandlePlayerDead;
     }
 
     private void OnDisable()
     {
-        Player.OnCoinCollected -= IncrementAmount;
-        Player.OnPlayerDead -= GameOver;
+        Player.OnCoinCollected -= HandleCoinCollected;
+        Player.OnPlayerDead -= HandlePlayerDead;
     }
 
     private void Start()
@@ -42,16 +47,37 @@ public class GameState : MonoBehaviour
         OnAmountUpdated?.Invoke(_collectedCoins, _totalCoins);
     }
 
-    private void IncrementAmount()
+    private void HandleCoinCollected()
     {
         _collectedCoins++;
         OnAmountUpdated?.Invoke(_collectedCoins, _totalCoins);
+
+        if (_collectedCoins == _totalCoins)
+        {
+            OnVictory?.Invoke();
+            GameOver("Victory!");
+        }
     }
 
-    private void GameOver()
+    private void HandlePlayerDead()
     {
-        Debug.Log("received");
+        GameOver("Game Over!");
+    }
+
+    private void GameOver(string text)
+    {
         _state = State.GameOver;
-        // SceneManager.LoadScene("Platformer2D");
+        _gameOverUI.text = text;
+        Invoke(nameof(ShowGameOverPanel), 1f);
+    }
+
+    private void ShowGameOverPanel()
+    {
+        _gameOverPanel.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Platformer2D");
     }
 }
