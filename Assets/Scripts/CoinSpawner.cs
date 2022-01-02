@@ -7,6 +7,7 @@ public class CoinSpawner : MonoBehaviour
 
     [Header("Coins container")]
     [SerializeField] private GameObject _coinsContainer;
+    [SerializeField] private Camera _camera;
 
     private Spot[] _spots;
 
@@ -17,10 +18,6 @@ public class CoinSpawner : MonoBehaviour
         {
             Debug.LogError("Spawn spots game objects missing");
         }
-    }
-
-    private void Start()
-    {
         SpawnCoins();
     }
 
@@ -30,6 +27,7 @@ public class CoinSpawner : MonoBehaviour
         {
             Coin coin = Instantiate(_template, spot.transform.position, Quaternion.identity);
             coin.transform.SetParent(_coinsContainer.transform);
+            coin.Init(_camera.transform.position);
         }
     }
 }

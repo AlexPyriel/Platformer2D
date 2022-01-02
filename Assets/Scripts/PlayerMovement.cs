@@ -3,17 +3,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Player))]
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private GameState _gameState;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
     private Rigidbody2D _rigidBody;
     private Animator _animator;
     private SpriteRenderer _renderer;
-    private Player _player;
     private float _velocity;
     private bool _grounded;
 
@@ -22,12 +21,11 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-        _player = GetComponent<Player>();
     }
 
     private void Update()
     {
-        if (_player.IsDead == false)
+        if (_gameState.CurrentState == GameState.State.Playing)
         {
             Move();
             Jump();
@@ -36,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_player.IsDead == false)
+        if (_gameState.CurrentState == GameState.State.Playing)
         {
             Flip();
         }
