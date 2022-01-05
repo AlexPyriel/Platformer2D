@@ -7262,9 +7262,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6431733446162141357, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
+      propertyPath: _jump
+      value: 
+      objectReference: {fileID: 8300000, guid: 901f1919d726244fe8be920c21895215, type: 3}
+    - target: {fileID: 6431733446162141357, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
       propertyPath: _gameState
       value: 
       objectReference: {fileID: 1803696277}
+    - target: {fileID: 6431733446162141357, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
+      propertyPath: _walk.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431733446162141357, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
+      propertyPath: _walk.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 55dd0ab0e108345dbb24ae2702d88be0, type: 3}
+    - target: {fileID: 6431733446162141357, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
+      propertyPath: _walk.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d21a84de3c1b4f61b0d9706dd5c7b1d, type: 3}
+    - target: {fileID: 7429383207517353276, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
+      propertyPath: _die
+      value: 
+      objectReference: {fileID: 8300000, guid: ab623327d1c1e4a6b806cf2bdd58f7bf, type: 3}
     - target: {fileID: 7429383207517353276, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
       propertyPath: _dieSound
       value: 

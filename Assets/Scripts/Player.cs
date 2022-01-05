@@ -9,7 +9,7 @@ using System;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private AudioClip _dieSound;
+    [SerializeField] private AudioClip _die;
 
     private Animator _animator;
     private AudioSource _audioSource;
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         {
             _rigidBody.bodyType = RigidbodyType2D.Static;
             _animator.SetTrigger("isDead");
-            _audioSource.PlayOneShot(_dieSound);
+            _audioSource.PlayOneShot(_die);
             OnPlayerDead?.Invoke();
             Invoke(nameof(Die), 1f);
         }

@@ -1,18 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AudioSource))]
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private GameState _gameState;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private AudioClip _jump;
 
     private Rigidbody2D _rigidBody;
     private Animator _animator;
     private SpriteRenderer _renderer;
+    private AudioSource _audioSource;
+
     private float _velocity;
     private bool _grounded;
 
@@ -21,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -63,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
             _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             _grounded = false;
             _animator.SetBool("isJumping", true);
+            _audioSource.PlayOneShot(_jump);
         }
 
         if (_rigidBody.velocity.y == 0)
