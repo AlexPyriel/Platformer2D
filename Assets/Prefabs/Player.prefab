@@ -105,8 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e3d7cf042e4418a90d7b0e8df8720e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameState: {fileID: 0}
   _speed: 8
   _jumpForce: 14
+  _jump: {fileID: 8300000, guid: 901f1919d726244fe8be920c21895215, type: 3}
 --- !u!212 &6431733446162141352
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -146,7 +148,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 84ce2f114ad12bd4ebafc77060220324, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -170,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd16e679e6b39440fb62f0c57a251271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _die: {fileID: 8300000, guid: ab623327d1c1e4a6b806cf2bdd58f7bf, type: 3}
 --- !u!82 &1954905511658465703
 AudioSource:
   m_ObjectHideFlags: 0

@@ -8,11 +8,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private GameState _gameState;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private AudioClip _jump;
 
+    private GameState _gameState;
     private Rigidbody2D _rigidBody;
     private Animator _animator;
     private SpriteRenderer _renderer;
@@ -85,5 +85,10 @@ public class PlayerMovement : MonoBehaviour
         {
             _renderer.flipX = _velocity < 0;
         }
+    }
+
+    public void Init(GameState gameState)
+    {
+        _gameState = gameState;
     }
 }

@@ -11,6 +11,8 @@ public class CoinSpawner : MonoBehaviour
 
     private Spot[] _spots;
 
+    public int Spots => _spots.Length;
+
     private void Awake()
     {
         _spots = GetComponentsInChildren<Spot>();
@@ -18,11 +20,23 @@ public class CoinSpawner : MonoBehaviour
         {
             Debug.LogError("Spawn spots game objects missing");
         }
-        SpawnCoins();
     }
 
-    private void SpawnCoins()
+    private void CleanUp()
     {
+        Coin[] activeCoins = _coinsContainer.GetComponentsInChildren<Coin>();
+        if (activeCoins.Length != 0)
+        {
+            foreach (Coin coin in activeCoins)
+            {
+                Destroy(coin.gameObject);
+            }
+        }
+    }
+
+    public void Spawn()
+    {
+        CleanUp();
         foreach (Spot spot in _spots)
         {
             Coin coin = Instantiate(_template, spot.transform.position, Quaternion.identity);

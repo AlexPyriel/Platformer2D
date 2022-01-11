@@ -1,32 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
 using TMPro;
 
 public class GameState : MonoBehaviour
 {
-    [SerializeField] private GameObject _coinContainer;
+    // [SerializeField] private GameObject _coinContainer;
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private TextMeshProUGUI _gameOverUI;
+    [SerializeField] private CoinSpawner _coinSpawner;
+    [SerializeField] private PlayerSpawner _playerSpawner;
 
     private State _state;
 
     private int _totalCoins;
     private int _collectedCoins;
     private bool _gameOver;
+    private Player _player;
 
     public enum State { Playing, GameOver }
     public static Action<int, int> OnAmountUpdated;
     public static Action OnVictory;
 
     public State CurrentState => _state;
-
-    private void Awake()
-    {
-
-    }
 
     private void OnEnable()
     {
@@ -42,9 +37,7 @@ public class GameState : MonoBehaviour
 
     private void Start()
     {
-        _state = State.Playing;
-        _totalCoins = _coinContainer.GetComponentsInChildren<Coin>().Length;
-        OnAmountUpdated?.Invoke(_collectedCoins, _totalCoins);
+        InitGame();
     }
 
     private void HandleCoinCollected()
@@ -76,8 +69,23 @@ public class GameState : MonoBehaviour
         _gameOverPanel.SetActive(true);
     }
 
+    private void InitGame()
+    {
+        if (_player)
+        {
+            Destroy(_player.gameObject);
+        }
+        _totalCoins = _coinSpawner.Spots;
+        _collectedCoins = 0;
+        _gameOverPanel.SetActive(false);
+        _coinSpawner.Spawn();
+        _player = _playerSpawner.Spawn();
+        _state = State.Playing;
+        OnAmountUpdated?.Invoke(_collectedCoins, _totalCoins);
+    }
+
     public void Restart()
     {
-        SceneManager.LoadScene("Platformer2D");
+        InitGame();
     }
 }
