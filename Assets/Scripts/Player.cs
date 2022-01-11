@@ -64,4 +64,19 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 2.6f, 0);
         _animator.SetTrigger("hasWon");
     }
+
+    private IEnumerator StartDelay(Action Oncomplete)
+    {
+        _rigidBody.bodyType = RigidbodyType2D.Static;
+        _animator.SetTrigger("justSpawned");
+        yield return new WaitForSeconds(2f);
+        _rigidBody.bodyType = RigidbodyType2D.Dynamic;
+        _animator.SetTrigger("gameStarted");
+        Oncomplete();
+    }
+
+    public void Init(Action OnComplete)
+    {
+        StartCoroutine(StartDelay(OnComplete));
+    }
 }

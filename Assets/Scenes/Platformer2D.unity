@@ -5985,7 +5985,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b45c95398f44680a2f61ad392cfce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinContainer: {fileID: 130274376}
   _gameOverPanel: {fileID: 1989717975}
   _gameOverUI: {fileID: 1596594336}
   _coinSpawner: {fileID: 106911984}
@@ -7263,6 +7262,10 @@ PrefabInstance:
     - target: {fileID: 6431733446162141330, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431733446162141352, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431733446162141356, guid: 4f6c87f452c644d89a527850989a8ac1, type: 3}
       propertyPath: m_RootOrder

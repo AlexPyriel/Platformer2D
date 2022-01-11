@@ -6,10 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Transform _path;
     [SerializeField] private float _speed;
+    [SerializeField] private GameState _gameState;
 
     private Transform[] _points;
     private int _currentPoint;
     private SpriteRenderer _renderer;
+
 
     private void Awake()
     {
@@ -27,6 +29,14 @@ public class Enemy : MonoBehaviour
     }
 
     private void Update()
+    {
+        if (_gameState.CurrentState == GameState.State.Playing)
+        {
+            Move();
+        }
+    }
+
+    private void Move()
     {
         Transform target = _points[_currentPoint];
 

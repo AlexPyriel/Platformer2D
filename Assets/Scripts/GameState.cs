@@ -17,7 +17,7 @@ public class GameState : MonoBehaviour
     private bool _gameOver;
     private Player _player;
 
-    public enum State { Playing, GameOver }
+    public enum State { Init, Playing, GameOver }
     public static Action<int, int> OnAmountUpdated;
     public static Action OnVictory;
 
@@ -71,17 +71,21 @@ public class GameState : MonoBehaviour
 
     private void InitGame()
     {
+        _state = State.Init;
         if (_player)
         {
             Destroy(_player.gameObject);
         }
+        _gameOverPanel.SetActive(false);
         _totalCoins = _coinSpawner.Spots;
         _collectedCoins = 0;
-        _gameOverPanel.SetActive(false);
+        OnAmountUpdated?.Invoke(_collectedCoins, _totalCoins);
         _coinSpawner.Spawn();
         _player = _playerSpawner.Spawn();
-        _state = State.Playing;
-        OnAmountUpdated?.Invoke(_collectedCoins, _totalCoins);
+        _player.Init(() =>
+        {
+            _state = State.Playing;
+        });
     }
 
     public void Restart()
