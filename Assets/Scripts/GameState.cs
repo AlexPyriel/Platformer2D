@@ -4,7 +4,6 @@ using TMPro;
 
 public class GameState : MonoBehaviour
 {
-    // [SerializeField] private GameObject _coinContainer;
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private TextMeshProUGUI _gameOverUI;
     [SerializeField] private CoinSpawner _coinSpawner;
