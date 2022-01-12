@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         else if (other.transform.TryGetComponent<Enemy>(out Enemy enemy))
         {
             _rigidBody.bodyType = RigidbodyType2D.Static;
-            _animator.SetTrigger("isDead");
+            _animator.SetTrigger(PlayerAnimatorState.Dead);
             _audioSource.PlayOneShot(_die);
             OnPlayerDead?.Invoke();
             Invoke(nameof(Die), 1f);
@@ -61,16 +61,16 @@ public class Player : MonoBehaviour
     {
         _rigidBody.bodyType = RigidbodyType2D.Static;
         transform.position = new Vector3(0, 2.6f, 0);
-        _animator.SetTrigger("hasWon");
+        _animator.SetTrigger(PlayerAnimatorState.Win);
     }
 
     private IEnumerator StartDelay(Action Oncomplete)
     {
         _rigidBody.bodyType = RigidbodyType2D.Static;
-        _animator.SetTrigger("justSpawned");
+        _animator.SetTrigger(PlayerAnimatorState.Spawn);
         yield return new WaitForSeconds(2f);
         _rigidBody.bodyType = RigidbodyType2D.Dynamic;
-        _animator.SetTrigger("gameStarted");
+        _animator.SetTrigger(PlayerAnimatorState.Start);
         Oncomplete();
     }
 

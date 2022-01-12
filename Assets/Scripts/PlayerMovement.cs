@@ -52,11 +52,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Mathf.Abs(_velocity) > 0)
         {
-            _animator.SetBool("isWalking", true);
+            _animator.SetBool(PlayerAnimatorState.Walk, true);
+
         }
         else
         {
-            _animator.SetBool("isWalking", false);
+            _animator.SetBool(PlayerAnimatorState.Walk, false);
         }
 
     }
@@ -67,14 +68,15 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             _grounded = false;
-            _animator.SetBool("isJumping", true);
+            _animator.SetBool(PlayerAnimatorState.Jump, true);
+
             _audioSource.PlayOneShot(_jump);
         }
 
         if (_rigidBody.velocity.y == 0)
         {
             _grounded = true;
-            _animator.SetBool("isJumping", false);
+            _animator.SetBool(PlayerAnimatorState.Jump, false);
         }
     }
 
